@@ -56,3 +56,5 @@ Where *imageURL* is the String with the URL for the image,
 
 The result is the following:
 ![](Screenshot_demo_picasso.png)
+
+The text with "I like fish." is not part of Picasso's functionality, I just thought it was funny.
