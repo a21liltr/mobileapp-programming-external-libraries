@@ -1,42 +1,58 @@
 
 # Rapport
 
-**Skriv din rapport här!**
+**Assignment 8 (VG): External Libraries**
 
-_Du kan ta bort all text som finns sedan tidigare_.
+For this assignment, the goal is to use an external library,
+that is pre-written code which one can make use of to implement in their project.
+Of course, this comes with a risk: Research has to be made and critical thinking has to take place,
+to make sure that the code is safe to use.
 
-## Följande grundsyn gäller dugga-svar:
+Therefor, for this project the external library Picasso has been chosen.
+The reason for using specifically Picasso can be boiled down to these:
+- It is easy to use
+- It is well-known and widely used in both examples and recommendations
+- It is created and maintained by Square, which is also a well known company, built on open source.
 
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
-
+To use Picasso, probably the easiest way is to add it as a dependency in the gradle using the code below:
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
-    }
+dependencies {
+...
+implementation 'com.squareup.picasso:picasso:(version)'
 }
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
+Where (version) is switched with the number of the version one would like to use.
+In this project, the version 2.8 is used.
 
-![](android.png)
+To use Picasso, an imageview is needed to load an image into and displayed through.
+This is done using the following code:
+```
+ImageView imageView = findViewById(R.id.my_image);
+```
 
-Läs gärna:
+Where **my_image** is the id for the image view in the xml file for the activity.
+To illustrate how Picasso works, an image is chosen from the website unsplash.com as they have quite the collection of photos that are free to use.
 
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+From their own website:
+
+"The photos on Unsplash are free to use and can be used for most commercial,
+personal projects, and for editorial use.
+You do not need to ask permission from or provide credit to the photographer or Unsplash,
+although it is appreciated when possible."
+
+The URL for the image is then put in a String, then the string is used as an argument in the code for Picasso.
+See code:
+```
+Picasso.get()
+    .load(imageURL)
+    .placeholder(R.drawable.buffering)
+    .into(imageView);
+```
+
+Where *imageURL* is the String with the URL for the image,
+*buffering* is a vector file in drawable folder, it comes with Android Studio,
+*imageView* is the variable name given to a declared ImageView.
+
+The result is the following:
+![](Screenshot_demo_picasso.png)
